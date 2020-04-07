@@ -43,7 +43,29 @@ public class UserDetailController
         String htmlContentToRender = templateEngine.process("pdf-template", context);
         String xHtml = null;
         xHtml = xhtmlConvert(htmlContentToRender);
-        //Do the below steps in a service call
+        //Below steps are to store the pdf inside spring boot
+//
+//        ITextRenderer renderer = new ITextRenderer();
+//
+//        String baseUrl = FileSystems
+//                .getDefault()
+//                .getPath("src", "main", "resources","templates")
+//                .toUri()
+//                .toURL()
+//                .toString();
+//        renderer.setDocumentFromString(xHtml, baseUrl);
+//        renderer.layout();
+//
+//        OutputStream outputStream = new FileOutputStream("src//test.pdf");
+//        renderer.createPDF(outputStream);
+//        outputStream.close();
+//
+//        return details;
+
+
+
+
+        //Do the below steps in a service call this is to send to angular
         htmlDoc=new StringReader(xHtml);
         ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
         PdfWriter pdfWriter=PdfWriter.getInstance(doc,outputStream);
