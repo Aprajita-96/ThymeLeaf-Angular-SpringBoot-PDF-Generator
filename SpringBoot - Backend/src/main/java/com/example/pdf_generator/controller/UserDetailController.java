@@ -1,6 +1,7 @@
 package com.example.pdf_generator.controller;
 
 import com.example.pdf_generator.model.UserDetail;
+import com.example.pdf_generator.service.Userservice;
 import com.itextpdf.text.*;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
@@ -9,6 +10,7 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,8 @@ public class UserDetailController
 
     @Autowired
     SpringTemplateEngine templateEngine;
+    @Autowired
+    Userservice userservice;
 
     @PostMapping("/getPdf")
     public ResponseEntity<ByteArrayResource> getPdf(@RequestBody UserDetail details) throws IOException, DocumentException {
@@ -89,6 +93,12 @@ public class UserDetailController
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         tidy.parseDOM(inputStream, outputStream);
         return outputStream.toString("UTF-8");
+    }
+
+    @GetMapping("/getdumby")
+    public ResponseEntity<UserDetail> getdummbyData(){
+        UserDetail responsse=userservice.dumbdata();
+        return new ResponseEntity<UserDetail>(responsse, HttpStatus.OK);
     }
 }
 

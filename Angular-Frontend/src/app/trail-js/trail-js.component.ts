@@ -10,20 +10,28 @@ import {PdfgeneratorService} from '../pdfgenerator.service';
 export class TrailJsComponent implements OnInit {
   // @ViewChild('content') content: ElementRef;
 private name :string="appu";
-private detailObject:any;
+detailObject: Details = {
+  name:'',
+  age:'',
+  country:''
+  };
+
 
   constructor(private service:PdfgeneratorService) { }
 
   ngOnInit(): void {
+    this.service.getdummydata().subscribe(res=>{
+      let result:any=res;
+      this.detailObject.name=result.name;
+      this.detailObject.age=result.age;
+      this.detailObject.country=result.country;
+      console.log(this.detailObject)
+    })
   }
  sub(){
-   this.detailObject=
-    {
-      "name":"Aprajita",
-      "age":"22",
-      "country":"india"
-    }
+   
    console.log("Im here")
+
    this.service.generatePdf(this.detailObject).subscribe(
     res=>{
       let file = new Blob([res], { type: 'application/pdf' });            
@@ -33,4 +41,10 @@ private detailObject:any;
 
  }
 
+}
+interface Details
+{
+name:string;
+age:string;
+country:string;
 }

@@ -14,4 +14,7 @@ export class PdfgeneratorService {
     return this.http.post<any>('http://localhost:8080/testapp/getPdf',userDetail,httpOptions)
     
   }
+  getdummydata(){
+    return this.http.get<any>('http://localhost:8080/testapp/getdumby');
+  }
 }
