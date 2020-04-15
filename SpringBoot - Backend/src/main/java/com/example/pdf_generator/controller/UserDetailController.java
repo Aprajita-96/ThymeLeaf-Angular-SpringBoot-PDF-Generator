@@ -23,6 +23,8 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import javax.print.Doc;
 import java.io.*;
 import java.nio.file.FileSystems;
+import java.util.List;
+
 @CrossOrigin("*")
 @RequestMapping("/testapp")
 @Controller
@@ -36,13 +38,15 @@ public class UserDetailController
     Userservice userservice;
 
     @PostMapping("/getPdf")
-    public ResponseEntity<ByteArrayResource> getPdf(@RequestBody UserDetail details) throws IOException, DocumentException {
+    public ResponseEntity<ByteArrayResource> getPdf(@RequestBody List<UserDetail> details) throws IOException, DocumentException {
         Context context = new Context();
         System.out.println(details);
         Document doc=new Document(PageSize.A4);
-        context.setVariable("name",details.getName());
-        context.setVariable("age",details.getAge());
-        context.setVariable("country",details.getCountry());
+        context.setVariable("details",details);
+        context.setVariable("sometext","This paragraph is to present the text other than the detail array Object");
+//        context.setVariable("name",details.getName());
+//        context.setVariable("age",details.getAge());
+//        context.setVariable("country",details.getCountry());
 
         String htmlContentToRender = templateEngine.process("pdf-template", context);
         String xHtml = null;
@@ -96,9 +100,10 @@ public class UserDetailController
     }
 
     @GetMapping("/getdumby")
-    public ResponseEntity<UserDetail> getdummbyData(){
-        UserDetail responsse=userservice.dumbdata();
-        return new ResponseEntity<UserDetail>(responsse, HttpStatus.OK);
+    public ResponseEntity<?> getdummbyData(){
+        List<UserDetail> responsse=userservice.dumbdata();
+        System.out.println(responsse);
+        return new ResponseEntity<>(responsse, HttpStatus.OK);
     }
 }
 

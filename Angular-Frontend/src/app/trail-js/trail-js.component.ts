@@ -15,6 +15,7 @@ detailObject: Details = {
   age:'',
   country:''
   };
+  public arrayresponse=[];
 
 
   constructor(private service:PdfgeneratorService) { }
@@ -22,17 +23,20 @@ detailObject: Details = {
   ngOnInit(): void {
     this.service.getdummydata().subscribe(res=>{
       let result:any=res;
-      this.detailObject.name=result.name;
-      this.detailObject.age=result.age;
-      this.detailObject.country=result.country;
-      console.log(this.detailObject)
+
+      // this.detailObject.name=result.name;
+      // this.detailObject.age=result.age;
+      // this.detailObject.country=result.country;
+      // console.log(this.detailObject)
+      this.arrayresponse=result;
+      console.log(this.arrayresponse)
     })
   }
  sub(){
    
    console.log("Im here")
 
-   this.service.generatePdf(this.detailObject).subscribe(
+   this.service.generatePdf(this.arrayresponse).subscribe(
     res=>{
       let file = new Blob([res], { type: 'application/pdf' });            
       var fileURL = URL.createObjectURL(file);

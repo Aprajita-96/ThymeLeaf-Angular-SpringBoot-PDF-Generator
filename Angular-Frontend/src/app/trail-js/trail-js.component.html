@@ -3,11 +3,7 @@
 <html lang="en">
 <head>
   <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
 
@@ -21,17 +17,17 @@
         <th>Country</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor="let obj of arrayresponse; let i=index">
       
-      <tr class="success">
-        <td>{{detailObject.name}}</td>
-        <td>{{detailObject.age}}</td>
-        <td>{{detailObject.country}}</td>
+      <tr class="success" *ngIf="i==0">
+        <td>{{obj.name}}</td>
+        <td>{{obj.age}}</td>
+        <td>{{obj.country}}</td>
       </tr>
-      <tr class="danger">
-        <td>Danger</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
+      <tr class="danger" *ngIf="i==1">
+        <td>{{obj.name}}</td>
+        <td>{{obj.age}}</td>
+        <td>{{obj.country}}</td>
       </tr>
     </tbody>
   </table>

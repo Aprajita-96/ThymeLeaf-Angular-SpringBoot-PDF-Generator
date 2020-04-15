@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet"/>
     <title>DownloadedPdf</title>
     <style>
 table {
@@ -19,29 +21,33 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: blue;
 }
 </style>
 </head>
 <body>
 
-<h1>Congratulations Developer</h1>
+<h1 th:style="'color: blue;'">Hello User</h1>
 
 <h2>Below are the details that were passed to the html page</h2>
 
-<p th:text="${'Name    : ' + name}"></p>
-<p th:text="${'Age     :' + age}"></p>
-<p th:text="${'Country : ' + country}"></p>
+<p  th:text="${sometext}"></p>
+
 <table>
     <tr>
         <th>Name</th>
         <th>Age</th>
         <th>Country</th>
     </tr>
-    <tr>
-        <td th:text="${name}"></td>
-        <td th:text="${age}"></td>
-        <td th:text="${country}"></td>
+    <tr th:if="${details.empty}">
+                    <td colspan="2"> No Books Available </td>
+                </tr>
+     
+    <tr class="success" th:each="detail: ${details}"
+        >
+        <td th:text="${detail.name}"></td>
+        <td th:text="${detail.age}"></td>
+        <td th:text="${detail.country}"></td>
     </tr>
     <tr>
         <td>Centro comercial Moctezuma</td>
